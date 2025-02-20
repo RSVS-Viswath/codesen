@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import axios from "axios";
 
 export async function POST(req: Request) {
   try {
-    const { role, question, answer } = await req.json();
+    const { role, question, answer,text } = await req.json();
 
     const prompt = question
       ? `Evaluate this answer: ${answer} for the question: ${question}`
-      : `Generate an interview question for a ${role}`;
+      : `Generate an interview question for a ${role} based on the following answer: ${text}`;
 
     const payload = {
       model: "llama-3.3-70b-versatile",
